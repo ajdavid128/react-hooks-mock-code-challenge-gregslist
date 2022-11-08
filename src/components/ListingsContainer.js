@@ -1,21 +1,17 @@
-import { React, useEffect, useState } from 'react'
+import { React, useState } from 'react'
 import ListingCard from './ListingCard'
 
-function ListingsContainer() {
-  const [listingState, setListings] = useState([])
+function ListingsContainer({listingState, setListings}) {
+  
+  // const [deletedState, setDeletedState] = useState()
 
-  const handleDelete = (id) => {
-    // fetch(`http://localhost:6001/listings/${id}`, { method: 'DELETE' })
-    // .then(response => response.json())
-    console.log(id)
+  const handleDelete = (e) => {
+    fetch(`http://localhost:6001/listings/${e.target.id}`, { method: 'DELETE' })
+    .then(setListings(listingState)) //setListings to a [...listingState, ~~~]
+    // console.log(e.target.id)
   }
 
 
-  useEffect(() => {
-    fetch('http://localhost:6001/listings')
-      .then((response) => response.json())
-      .then((listingsData) => setListings(listingsData))
-  }, [])
   
   const listingsArray = listingState.map((listing) => (
     <ListingCard

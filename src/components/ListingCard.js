@@ -22,7 +22,7 @@ function ListingCard( { description, image, location, handleDelete, id } ) {
         )}
         <strong>{description}</strong>
         <span> · {location}</span>
-        <button onClick={handleDelete(id)} className="emoji-button delete">🗑</button>
+        <button id={id} onClick={handleDelete} className="emoji-button delete">🗑</button>
       </div>
     </li>
   );

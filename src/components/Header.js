@@ -1,7 +1,21 @@
-import React from "react";
+import {React, useState} from "react";
 import Search from "./Search";
 
-function Header() {
+function Header({listingState, setListings}) {
+
+  const [searchQuery, setSearchQuery] = useState("")
+
+    const itemsToDipsplay = listingState.filter((eachListing) => {
+      return eachListing.description.toLowerCase().includes(searchQuery.toLowerCase())
+    }) 
+
+    function handleSubmit(e) {
+      e.preventDefault();
+      setListings(itemsToDipsplay);
+      console.log("submitted");
+    }
+
+
   return (
     <header>
       <h1>
@@ -10,7 +24,7 @@ function Header() {
         </span>
         gregslist
       </h1>
-      <Search />
+      <Search handleSubmit={handleSubmit} setSearchQuery={setSearchQuery} searchQuery={searchQuery}/>
     </header>
   );
 }
